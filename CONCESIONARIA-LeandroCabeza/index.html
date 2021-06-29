@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css" />   
+    <script src="./js/scripts.js" defer type="module"></script>
+    <title>Concesionaria</title>
+</head>
+
+<body>
+
+    <!-- DATOS IMPORTANTES 
+
+        Ejecutar desde la raiz del proyecto!!!
+            json-server -w -d 2000 -p 3000 ./db/db.json
+
+            Info:
+                1ro - en la carpeta del proyecto le damos 
+                    npm install -g json-server
+
+                2do -     Para permitir ejecucion de scripts (windows)
+                            -> Set-ExecutionPolicy Unrestricted
+
+                3ro - json-server -w -d 2000 -p 3000 ./db/db.json
+
+                URL : http://localhost:3000/anuncios
+
+                PD : si da problemas con los permisos es debido a que ne 
+                se ejecuto como administrador el visual code.
+     -->
+
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar navbar-primary bg-primary">
+            <div class="container-fluid">
+                <div class="col-6">
+                    <a class="navbar-brand" href="#">
+                        <div id="logoConcesionaria"></div>
+                    </a>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col">
+                        <a href="#">Nosotros</a>
+                    </div>
+                    <div class="col">
+                        <a href="#">Anuncios</a>
+                    </div>
+                    <div class="col">
+                        <a href="#">Blog</a>
+                    </div>
+                    <div class="col">
+                        <a href="#">Contacto</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<!-- MAIN -->
+    <div class="main">
+        <section class="container-encabezado">
+            <div class="row">
+                <div class="col text-center">
+                    <h1 class="display-4">Administracion</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <div id="imagenPrincipal"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="dataIn">
+            <fieldset>
+                <legend>Informacion del anuncio</legend>
+                <form id="formulario">
+                    <input type="text" id="txtId" name="id" hidden />
+                    <label>
+                        Titulo: <input type="text" id="txtTitulo" name="titulo" placeholder="Titulo" required />
+                    </label>
+                    <br /><br />
+                    <label>
+                        Transaccion:
+                        <select name="transaccion" required>
+                            <option value=" " disabled selected>Elegir</option>
+                            <option value="Venta">Venta</option>
+                            <option value="Alquiler">Alquiler</option>
+                        </select>
+                    </label>
+                    <br /><br />
+                    <label>
+                        Descripcion: <input type="text" id="txtDescripcion" name="descripcion" placeholder="Descripcion"required />
+                    </label>
+                    <br>
+                    <label>
+                        Precio: <input type="number" id="numberPrecio" name="precio" placeholder="Precio" required />
+                    </label>
+                    <br>
+                    <label>
+                        <img class="iconoImg" src="./assets/puerta.png" alt="Icono puertas de auto"> <input type="number" id="num_puertas" name="puertas" placeholder="Puertas" required />
+                    </label>
+                    <label>
+                        <img class="iconoImg" src="./assets/velocimetro.png" alt="Icono Velocimetro"> <input type="number" id="num_kmh" name="Kms" placeholder="Kms" />
+                    </label>
+                    <label>
+                        <img class="iconoImg" src="./assets/motor.png" alt="Icono potencia del motor"><input type="number" id="potencia"name="potencia" placeholder="Potencia" required />
+                    </label>
+                    <br>
+                </form>
+            </fieldset>
+        </section>
+<!-- BOTONERA -->
+        <section class="text-center">
+            <button class="btn mostrar-boton" id="btnAlta" type="button"><img class="icono" src="./assets/save.svg"alt=""> Guardar </button> 
+            <button id="btnModificar" class="btn-opcional" type="button">Modificar</button>
+            <button id="btnEliminar" class="btn-opcional" type="button"><img class="icono" src="./assets/delete.svg"alt="">Eliminar</button>
+            <button id="btnCancelar" class="btn-opcional" type="reset">Cancelar</button>
+        </section>
+
+<!-- FILTROS -->
+        <section class="container filtroDiv " style="margin-top: 35px;">
+            <div class="row">
+                <div class="col text-center">
+                    <h3 style="margin-top: 15px;"> --- FILTROS  ---- </h3>
+                </div>
+            </div>
+            <hr />
+            <div class="row text-left">
+                <div class="col"><h4>Filtrar por</h4></div>
+                <div class="col"><h4>Promedio de precios</h4></div>
+            </div>
+            <div class="row text-left">
+                <div class="col">
+                    <div style="margin: 5px;">
+                        <label>Transaccion:</label>
+                        <select name="transaccion" id="selectFiltros" required style="width: 135px;">
+                            <option value="Todos" selected>Todos</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                        <input style="width: 100px; margin-top: 5px;" type="text" id="filtroPrecio" value="N/A" readonly>
+                </div>
+            </div>
+    </div>
+    <!-- CHECKBOXS -->
+    <section class="container checkboxDiv " style="margin-top: 15px;">
+        <div class="row">
+            <div class=" col">
+                <h3>Campos mostrados <i>(Tildar para mostrar)</i></h2>
+            </div>
+        </div>
+        <hr />
+        <div class="row ">
+            <div class="form-check form-check-inline" style="margin-left: 20px;">
+                <input class="form-check-input" type="checkbox" id="checkbox1" value="id" checked>Id
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="checkbox2" value="titulo" checked>Titulo
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="checkbox3" value="transaccion" checked>Transaccion
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="checkbox4" value="descripcion" checked>Descripcion
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="checkbox5" value="precio" checked>Precio
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="checkbox6" value="num_puertas" checked>Puertas
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="checkbox7" value="num_kmh" checked>KM
+            </div>   
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="checkbox8" value="potencia" checked>Potencia
+            </div>
+    </div>
+
+    </section>
+    <!-- TABLA A RENDERIZAR -->
+    <section class="tabla">
+        <div class="row justify-content-md-center">
+            <div id="divTabla" class="text-center"></div>
+        </div>
+
+    </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <nav class="navbar navbar-primary bg-primary">
+
+            <div class="container-fluid">
+                <div class="row justify-content-md-center">
+                    <div class="col"><a href="#">Nosotros</a></div>
+                    <div class="col"><a href="#">Anuncios</a></div>
+                    <div class="col"><a href="#">Blog</a></div>
+                    <div class="col"><a href="#">Contacto</a></div>
+                </div>
+
+                <div>
+                    <p>Todos los derechos reservados 2021 &copy;</p>
+                </div>
+            </div>
+        </nav>
+    </footer>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+</body>
+</html>

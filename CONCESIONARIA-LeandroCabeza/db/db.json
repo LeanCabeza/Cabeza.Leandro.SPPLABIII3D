@@ -1,0 +1,54 @@
+{
+  "anuncios": [
+    {
+      "id": 1,
+      "titulo": "Fiat 147 ( 1993 )",
+      "transaccion": "Alquiler",
+      "descripcion": "Buen estado , modelo BASE sin aire ni direccion , unico dueño",
+      "precio": "300000",
+      "num_puertas": "3",
+      "num_kmh": "45000",
+      "potencia": "90"
+    },
+    {
+      "id": 2,
+      "titulo": "Audi A4 ( 2018 )",
+      "transaccion": "Venta",
+      "descripcion": "Como nuevo , tope de gama, unico dueño , nunca duerme a la intemperie",
+      "precio": "1004000",
+      "num_puertas": "3",
+      "num_kmh": "20000",
+      "potencia": "150"
+    },
+    {
+      "id": 3,
+      "titulo": "VW Gol G4 ( 2008 )",
+      "transaccion": "Venta",
+      "descripcion": "Perfectas condiciones , inmaculado de chapa y pintura , mecánica excelente",
+      "precio": "550000",
+      "num_puertas": "3",
+      "num_kmh": "150000",
+      "potencia": "93"
+    },
+    {
+      "id": 4,
+      "titulo": "Suran Trendline ( 2015 )",
+      "transaccion": "Alquiler",
+      "descripcion": "Mecanica excelente , tuvo dos choques",
+      "precio": "750000",
+      "num_puertas": "5",
+      "num_kmh": "75000",
+      "potencia": "110"
+    },
+    {
+      "id": 5,
+      "titulo": "Saveiro G4 Diesel (1.9SD)",
+      "transaccion": "Venta",
+      "descripcion": "6/10 puntos de chapa , motor fundido",
+      "precio": "400000",
+      "num_puertas": "2",
+      "num_kmh": "450000",
+      "potencia": "64"
+    }
+  ]
+}
